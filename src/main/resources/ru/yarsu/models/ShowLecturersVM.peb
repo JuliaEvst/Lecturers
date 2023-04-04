@@ -1,0 +1,38 @@
+{% extends "./layout.peb" %}
+
+{% block title %} Список преподавателей {% endblock %}
+
+{% block content %}
+    <div class="grid-x grid-padding-x">
+        <div class="cell large-12">
+
+            <h1> Список курсов и их описание: </h1>
+            <table class="hover unstriped">
+                <thead>
+                    <tr>
+                        <td> Название курса </td>
+                        <td> ФИО преподавателя </td>
+                        <td> Описание курса </td>
+                    </tr>
+                </thead>
+
+                <tbody>
+                {% for course in model.courses %}
+                    <tr>
+                            <td> {{ course.courseName }} </td>
+                            <td> <a href="lecturers/{{ course.lecturerFullName }}"> {{ course.lecturerFullName }} </a> </td>
+                            <td> {{ course.description }} </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <h1> Список преподавателей с ссылкой на курсы, которые они преподают </h1>
+            <ul>
+                {% for course in model.courses %}
+                    <li> <a href="lecturers/{{ course.lecturerFullName }}"> {{ course.lecturerFullName }} </a> </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
